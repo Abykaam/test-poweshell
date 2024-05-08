@@ -8,12 +8,14 @@ $client = New-Object System.Net.Sockets.UdpClient
 # Define a byte array for data
 [byte[]]$bytes = 0..65535|%{0}
 
+# Create an endpoint for the server
+$remoteEndPoint = New-Object System.Net.IPEndPoint ([System.Net.IPAddress]::Any, 0)
+
 # Loop to read data from the UDP client
 while ($true) {
     try {
         # Receive data from the server
-        $remoteEndPoint = New-Object System.Net.IPEndPoint ([System.Net.IPAddress]::Any, 0)
-        $data, $remoteEndPoint = $client.Receive($bytes)
+        $data, [ref]$remoteEndPoint = $client.Receive([ref]$remoteEndPoint)
 
         # Convert received data to string
         $receivedData = [System.Text.Encoding]::ASCII.GetString($data)
