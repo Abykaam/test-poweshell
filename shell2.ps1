@@ -1,5 +1,5 @@
 # Define the URL of the server endpoint
-$serverUrl = "http://192.168.166.197:4444"
+$serverUrl = "http://192.168.166.197:8000"
 
 # Loop to continuously make HTTP requests to the server
 while ($true) {
